@@ -113,6 +113,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -131,6 +132,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -141,13 +143,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="D3D12CmdList.h" />
     <ClInclude Include="D3D12Device.h" />
+    <ClInclude Include="D3D12Fence.h" />
+    <ClInclude Include="D3D12Window.h" />
+    <ClInclude Include="D3D12Queue.h" />
+    <ClInclude Include="IFence.h" />
+    <ClInclude Include="ICmdList.h" />
     <ClInclude Include="IDevice.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="IQueue.hpp" />
+    <ClInclude Include="IResource.h" />
+    <ClInclude Include="IWindow.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="D3D12CmdList.cpp" />
     <ClCompile Include="D3D12Device.cpp" />
+    <ClCompile Include="D3D12Fence.cpp" />
+    <ClCompile Include="D3D12Resource.cpp" />
+    <ClCompile Include="D3D12Window.cpp" />
+    <ClCompile Include="D3D12Queue.cpp" />
+    <ClCompile Include="IResource.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
