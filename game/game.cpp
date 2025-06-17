@@ -6,6 +6,8 @@
 #include <memory>
 #include <cstdio>
 #include <filesystem>
+#include <chrono>
+#include <thread>
 
 static bool areSame(IResource* p1, IResource* p2)
 {
@@ -68,6 +70,9 @@ int main()
             desc.m_isShared = (pPresentGPU->getDesc() != pRenderGPU->getDesc());
             pDstFrame->getDesc(desc);
             pSrcFrame = pRenderGPU->createResource(desc);
+#ifndef NDEBUG
+            pSrcFrame->setName(L"pSrcFrame");
+#endif
 
             // load image from file
             char buffer[32];
@@ -80,6 +85,9 @@ int main()
 
             // create resource that presenting GPU can access
             auto pSrcFrameI = pPresentGPU->createSharedResource(pRenderGPU, pSrcFrame);
+#ifndef NDEBUG
+            pSrcFrameI->setName(L"pSrcFrameI");
+#endif
             pSrcFramesI[uSrcFrame] = pSrcFrameI;
         }
 
@@ -95,7 +103,13 @@ int main()
     }
 
     pRenderQueue->flush();
-    pSwapChainQueue->flush();
+
+    {
+        // execute a dummy cmd list to flush for sure
+        auto pCmdList = pSwapChainQueue->startRecording();
+        pSwapChainQueue->execute(pCmdList);
+        pSwapChainQueue->flush();
+    }
 
     return 0;
 }

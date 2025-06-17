@@ -120,7 +120,11 @@ std::shared_ptr<IResource> D3D12Window::getNextImage()
         return nullptr;
     }
 
-    return std::make_shared<D3D12Resource>(backBuffer);
+    auto pResource = std::make_shared<D3D12Resource>(backBuffer);
+#ifndef NDEBUG
+    pResource->setName(L"backbuffer");
+#endif
+    return pResource;
 }
 
 void D3D12Window::present()

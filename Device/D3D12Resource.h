@@ -20,6 +20,13 @@ public:
     // Getter for the underlying D3D12 resource
     ID3D12Resource* getResource() const { return m_resource.Get(); }
 
+    // Set a name for the resource (useful for debugging)
+    virtual void setName(const std::wstring& name) override {
+        if (m_resource) {
+            m_resource->SetName(name.c_str());
+        }
+    }
+
 private:
     ComPtr<ID3D12Resource> m_resource;
 }; 

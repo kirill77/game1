@@ -34,4 +34,5 @@ struct IResource : public std::enable_shared_from_this<IResource>
     virtual void loadFromFile(const std::filesystem::path& sPath, IQueue* pQueue) = 0;
     virtual void getDesc(ResDesc &outDesc) = 0;
     virtual void writeTo(const char* pData, uint32_t nBytes) = 0;
+    virtual void setName(const std::wstring& name) = 0;
 };
